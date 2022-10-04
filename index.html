@@ -10,40 +10,20 @@
     <body>
          <header>
              <h1>Towers of Hanoi</h1>
+             <p>Click a top ring to select it, then click on a pole to drop it. Smaller rings can only be placed on top of larger rings. Move all the rings to a different pole to win.</p>
+             <h2 class='winner-text'></h2>
          </header>
          <main>
              <div class='pole-container'>
                  <div class='pole' id='pole-1'>
-                     <div class='ring-row-1 ring-row'>
-                         <div class='ring-1 ring' id='1'></div>
-                     </div>
-                     <div class='ring-row-2 ring-row'>
-                         <div class='ring-2 ring' id='2'></div>
-                     </div>
-                     <div class='ring-row-3 ring-row'>
-                         <div class='ring-3 ring' id='3'></div>
-                     </div>
-                     <div class='ring-row-4 ring-row'>
-                         <div class='ring-4 ring' id='4'></div>
-                     </div>
-                     <div class='ring-row-5 ring-row'>
-                         <div class='ring-5 ring' id='5'></div>
-                     </div>
+                         <div class='ring-1 ring' id='1' draggable='true'>1</div>
+                         <div class='ring-2 ring' id='2' draggable='true'>2</div>
+                         <div class='ring-3 ring' id='3' draggable='true'>3</div>
+                         <div class='ring-4 ring' id='4' draggable='true'>4</div>
+                         <div class='ring-5 ring' id='5' draggable='true'>5</div>
                  </div>
-                 <div class='pole' id='pole-2'>
-                     <div class='ring-row-1 ring-row'></div>
-                     <div class='ring-row-2 ring-row'></div>
-                     <div class='ring-row-3 ring-row'></div>
-                     <div class='ring-row-4 ring-row'></div>
-                     <div class='ring-row-5 ring-row'></div>
-                 </div>
-                 <div class='pole' id='pole-3'>
-                     <div class='ring-row-1 ring-row'></div>
-                     <div class='ring-row-2 ring-row'></div>
-                     <div class='ring-row-3 ring-row'></div>
-                     <div class='ring-row-4 ring-row'></div>
-                     <div class='ring-row-5 ring-row'></div>
-                 </div>
+                 <div class='pole' id='pole-2'></div>
+                 <div class='pole' id='pole-3'></div>
              </div>
          </main>
         <script src="script.js" defer></script>

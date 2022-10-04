@@ -8,9 +8,9 @@ body {
 
 .pole-container {
     margin: 0 auto;
-    width: 1000px;
+    width: 900px;
     max-width: 100%;
-    height: 700px;
+    height: 600px;
     max-height: 100%;
     display: flex;
     flex-direction: row;
@@ -22,21 +22,18 @@ body {
     display: flex;
     flex-direction: column;
     border: solid black 1px;
+    z-index: 1;
+    justify-content: flex-end;
 }
 
-.ring-row {
-    flex-grow: 1;
-    border: solid blue 1px;
-    align-items: center;
-    display: flex;
-}
 
 .ring {
     border-radius: 30px;
-    height: 60%;
-    margin: auto;
-    align-items: center;
+    height: 10%;
+    margin: 15px auto;
     border: solid black 1px;
+    z-index: 2;
+    font-size: 30px;
 }
 
 .ring-1 {
