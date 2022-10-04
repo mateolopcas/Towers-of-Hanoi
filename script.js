@@ -31,17 +31,27 @@ function dropRing(event) {
 const rings = document.querySelectorAll('.ring')
 
 rings.forEach((ring) => {
-    ring.addEventListener('click', storeRing, true)
+//    ring.addEventListener('click', storeRing, true)
+    ring.addEventListener('dragstart', dragstartHandler, true)
 })
 
 
 //EVENT LISTENERS FOR POLES
 
 poles.forEach((pole) => {
-    pole.addEventListener('click', checkRing, false)
-    pole.addEventListener('click', dropRing, false)
-    pole.addEventListener('click', checkWin)
+//    pole.addEventListener('click', checkRing, false)
+//    pole.addEventListener('click', dropRing, false)
+//    pole.addEventListener('dragover', dragoverHandler, false)
+//    pole.addEventListener('drop', dropHandler, false)
+//    pole.addEventListener('drop', toggleDrag)
+//    pole.addEventListener('drop', checkWin)
 })
+
+document.documentElement.addEventListener('dragover', dragoverHandler, false)
+document.documentElement.addEventListener('dragleave', dragleaveHandler, false)
+document.documentElement.addEventListener('drop', dropHandler, false)
+document.documentElement.addEventListener('drop', toggleDrag)
+document.documentElement.addEventListener('drop', checkWin)
 
 //FUNCTION CAN RING GO?
 
@@ -72,7 +82,58 @@ function checkWin() {
 //DRAGGING FUNCTIONALITY
 
 
+function dragstartHandler(event) {
+    event.dataTransfer.setData('text/plain', event.target.id)
+    event.dataTransfer.effectAllowed = 'move'
+    setTimeout(() => {
+        event.target.classList.add('hide')
+    }, 0)
+}
 
 
+function dragoverHandler(event) {
+    event.preventDefault()
+    event.dataTransfer.dropEffect = 'move'
+    if (event.target.classList.contains('pole')) {
+        event.target.classList.add('highlight')
+    }
+}
 
+function dragleaveHandler(event) {
+    event.preventDefault()
+    event.target.classList.remove('highlight')
+}
+
+function dropHandler(event) {
+    event.preventDefault()
+    let data = event.dataTransfer.getData('text/plain')
+    let draggedRing = document.getElementById(data)
+    if (event.target.classList.contains('pole')) {
+        let currentRings = Array.from(event.target.children)
+        let canGo = true
+        currentRings.forEach((ring) => {
+            if (Number(ring.id) < Number(data))
+                canGo = false
+        })
+        if (canGo === true) {
+            event.target.insertBefore(draggedRing, event.target.firstChild)
+        }
+    }
+    draggedRing.classList.remove('hide')
+    setTimeout(() => {
+        event.target.classList.remove('highlight')
+    }, 0)
+}
+
+function toggleDrag() {
+    poles.forEach((pole) => {
+        let children = Array.from(pole.children)
+        if (children[0]) {
+            children.forEach((child) => {
+                child.draggable = false
+            })
+            children[0].draggable = true
+        }
+    })
+}
 
