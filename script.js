@@ -9,6 +9,7 @@ const rings = document.querySelectorAll('.ring')
 
 rings.forEach((ring) => {
     ring.addEventListener('dragstart', dragstartHandler, true)
+    ring.addEventListener('dragend', dragendHandler, true)
 })
 
 document.documentElement.addEventListener('dragover', dragoverHandler, false)
@@ -86,3 +87,6 @@ function toggleDrag() {
     })
 }
 
+function dragendHandler(event) {
+    event.target.classList.remove('hide')
+}
