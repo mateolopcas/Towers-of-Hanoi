@@ -12,8 +12,18 @@
              <h1>Towers of Hanoi</h1>
              <p>Drag and drop any top ring to a different pole. Smaller rings can only be placed on top of larger rings. Move all the rings to a different pole to win.</p>
              <h2 class='winner-text'></h2>
+
          </header>
          <main>
+             <div class='button-container'>
+                 <button class='reset-button'>Reset</button>
+                 <div class='variable-rings'>
+                     <p class='ring-counter'>Number of rings: 5</p>
+                     <button class='increase-ring-count'>Increase</button>
+                     <button class='decrease-ring-count'>Decrease</button>
+                 </div>
+                 <p class='turn-counter'>Turns: 0</p>
+             </div>
              <div class='pole-container'>
                  <div class='pole' id='pole-1'>
                          <div class='ring-1 ring' id='1' draggable='true'>1</div>
@@ -25,6 +35,7 @@
                  <div class='pole' id='pole-2'></div>
                  <div class='pole' id='pole-3'></div>
              </div>
+             <canvas id='pole-background' width='900px' height='500px'></canvas>
          </main>
         <script src="script.js" defer></script>
     </body>

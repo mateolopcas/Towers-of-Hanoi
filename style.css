@@ -10,11 +10,10 @@ body {
     margin: 0 auto;
     width: 900px;
     max-width: 100%;
-    height: 500px;
-    max-height: 100%;
     display: flex;
     flex-direction: row;
     border: solid black 2px;
+    aspect-ratio: 9 / 5;
 }
 
 .pole {
@@ -24,7 +23,6 @@ body {
     border: solid black 1px;
     z-index: 1;
     justify-content: flex-end;
-    background: linear-gradient(90deg, white 0, white 45%, #873e23 45%, #873e23 55%, white 55%, white 100%);
 }
 
 
@@ -39,13 +37,13 @@ body {
 
 .ring-1 {
     background-color: red;
-    width: 30%;
+    width: 40%;
     order: 1;
 }
 
 .ring-2 {
     background-color: orange;
-    width: 45%;
+    width: 50%;
     order: 2;
 }
 
@@ -57,15 +55,34 @@ body {
 
 .ring-4 {
     background-color: green;
-    width: 75%;
+    width: 70%;
     order: 4;
 }
 
 .ring-5 {
     background-color: blue;
-    width: 90%;
+    width: 80%;
     order: 5;
 }
+
+.ring-6 {
+    background-color: fuchsia;
+    width: 90%;
+    order: 6;
+}
+
+.ring-7 {
+    background-color: purple;
+    width: 100%;
+    order: 7;
+}
+
+#pole-background {
+    max-width: 100%;
+    max-height: 100%;
+    transform: translateY(-100%);
+}
+
 
 .highlight {
     border: dotted red 4px;
@@ -73,4 +90,11 @@ body {
 
 .hide {
     display: none;
+}
+
+.button-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
 }

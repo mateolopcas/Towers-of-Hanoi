@@ -1,16 +1,20 @@
 //GLOBAL QUERY SELECTORS
 
 const poles = Array.from(document.querySelectorAll('.pole'))
-
-const rings = document.querySelectorAll('.ring')
-
+let turnCount = 0
+let turnCounter = document.querySelector('.turn-counter')
 
 //EVENT LISTENERS
 
-rings.forEach((ring) => {
-    ring.addEventListener('dragstart', dragstartHandler, true)
-    ring.addEventListener('dragend', dragendHandler, true)
-})
+function resetRingEvents() {
+    let rings = document.querySelectorAll('.ring')
+    rings.forEach((ring) => {
+        ring.addEventListener('dragstart', dragstartHandler, true)
+        ring.addEventListener('dragend', dragendHandler, true)
+    })
+}
+
+resetRingEvents()
 
 document.documentElement.addEventListener('dragover', dragoverHandler, false)
 document.documentElement.addEventListener('dragleave', dragleaveHandler, false)
@@ -22,8 +26,11 @@ document.documentElement.addEventListener('drop', checkWin)
 //DETERMINE IF WIN
 
 function checkWin() {
+    let ringCounter = document.querySelector('.ring-counter')
+    let counterNumber = Number(ringCounter.innerText.match(/\d+/g)[0])
     let winnerText = document.querySelector('.winner-text')
-    if (poles[1].children.length === 5 || poles[2].children.length === 5) {
+
+    if (poles[1].children.length === counterNumber || poles[2].children.length === counterNumber) {
         winnerText.innerText = `Congratulations! You have solved the Towers of Hanoi!`
     }
 }
@@ -65,11 +72,12 @@ function dropHandler(event) {
             if (Number(ring.id) < Number(data))
                 canGo = false
         })
-        if (canGo === true) {
+        if ((canGo === true) && (event.target !== draggedRing.parentElement)) {
             event.target.insertBefore(draggedRing, event.target.firstChild)
+            turnCount ++
+            turnCounter.innerText = `Turns: ${turnCount}`
         }
     }
-    draggedRing.classList.remove('hide')
     setTimeout(() => {
         event.target.classList.remove('highlight')
     }, 0)
@@ -90,3 +98,82 @@ function toggleDrag() {
 function dragendHandler(event) {
     event.target.classList.remove('hide')
 }
+
+
+//CANVAS DRAWING/STYLING
+
+let canvas = document.querySelector('#pole-background')
+let context = canvas.getContext('2d')
+
+context.fillStyle = '#523A28'
+context.fillRect(125, 500, 50, -400)
+context.fillRect(425, 500, 50, -400)
+context.fillRect(725, 500, 50, -400)
+
+context.beginPath()
+context.arc(150, 100, 25, -Math.PI, 0)
+context.arc(450, 100, 25, -Math.PI, 0)
+context.arc(750, 100, 25, -Math.PI, 0)
+context.fill()
+
+
+//RESET BUTTON
+
+const resetButton = document.querySelector('.reset-button')
+
+function resetGame () {
+    let currentRings = document.querySelectorAll('.ring')
+    let ringCounter = document.querySelector('.ring-counter')
+    let counterNumber = ringCounter.innerText.match(/\d+/g)[0]
+    currentRings.forEach((ring) => {
+        ring.remove()
+    })
+    for (let i=1; i <= Number(counterNumber); i++) {
+        let newRing = document.createElement('div')
+        newRing.classList.add(`ring`, `ring-${i}`)
+        newRing.id = `${i}`
+        newRing.innerText = i
+        poles[0].append(newRing)
+    }
+
+    let winnerText = document.querySelector('.winner-text')
+    winnerText.innerText = ''
+    turnCount = 0
+    turnCounter.innerText = 'Turns: 0'
+
+    toggleDrag()
+    resetRingEvents()
+}
+
+resetButton.addEventListener('click', resetGame)
+
+//TOGGLE RINGS BUTTONS
+
+let increaseButton = document.querySelector('.increase-ring-count')
+let decreaseButton = document.querySelector('.decrease-ring-count')
+
+
+function addRing() {
+    let ringCounter = document.querySelector('.ring-counter')
+    let counterNumber = ringCounter.innerText.match(/\d+/g)[0]
+    let newCount = Number(counterNumber) + 1
+    if (newCount <= 7) {
+        ringCounter.innerText = `Number of rings: ${newCount}`
+    }
+    resetGame()
+}
+
+function removeRing() {
+    let ringCounter = document.querySelector('.ring-counter')
+    let counterNumber = ringCounter.innerText.match(/\d+/g)[0]
+    let newCount = Number(counterNumber) - 1
+    if (newCount >= 3) {
+        ringCounter.innerText = `Number of rings: ${newCount}`
+    }
+    resetGame()
+}
+
+increaseButton.addEventListener('click', addRing)
+decreaseButton.addEventListener('click', removeRing)
+
+
