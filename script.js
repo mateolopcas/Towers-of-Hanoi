@@ -177,3 +177,66 @@ increaseButton.addEventListener('click', addRing)
 decreaseButton.addEventListener('click', removeRing)
 
 
+//SELF-SOLVING ALGORITHM
+
+function solveTowers() {
+    //ASSIGN PATTERNS
+    let rings = document.querySelectorAll('.ring')
+    rings.forEach((ring) => {
+        if ((rings.length + Number(ring.id)) % 2 === 1) {
+            ring.dataset.pattern = 'right'
+        } else {
+            ring.dataset.pattern = 'left'
+        }
+        ring.dataset.moves = '0'
+    })
+    let solutionCounter = 2 ** rings.length - 1
+    
+
+    //ITERATE MOVEMENT
+
+    let currentMove
+    let lastMove
+
+    for (let i = 0; i < solutionCounter; i++) {
+        rings.forEach((ring) => {
+            if (ring === ring.parentElement.children[0]) {
+                if ((ring !== lastMove) && (currentMove === undefined)) {
+                    currentMove = ring
+                }
+                if ((ring !== lastMove) && (Number(ring.id) < Number(currentMove.id))) {
+                    currentMove = ring
+                } 
+            }
+        })
+
+        let moveMod = Number(currentMove.dataset.moves) % 3
+
+        if (currentMove.dataset.pattern === 'left') {
+            if (moveMod === 0) {
+                poles[2].insertBefore(currentMove, poles[2].firstChild)
+            } else if (moveMod === 1) {
+                poles[1].insertBefore(currentMove, poles[1].firstChild)
+            } else if (moveMod === 2) {
+                poles[0].insertBefore(currentMove, poles[0].firstChild)
+            }
+        } else if (currentMove.dataset.pattern === 'right') {
+            if (moveMod === 0) {
+                poles[1].insertBefore(currentMove, poles[1].firstChild)
+            } else if (moveMod === 1) {
+                poles[2].insertBefore(currentMove, poles[2].firstChild)
+            } else if (moveMod === 2) {
+                poles[0].insertBefore(currentMove, poles[0].firstChild)
+            }
+        }
+        currentMove.dataset.moves = Number(currentMove.dataset.moves) + 1
+        lastMove = currentMove
+        currentMove = undefined
+        console.log(`Ring ${lastMove.id} moved to ${lastMove.parentElement.id}`)
+    }
+}
+
+
+
+let solveButton = document.querySelector('.solution')
+solveButton.addEventListener('click', solveTowers)
