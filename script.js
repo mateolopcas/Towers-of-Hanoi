@@ -180,6 +180,7 @@ decreaseButton.addEventListener('click', removeRing)
 //SELF-SOLVING ALGORITHM
 
 function solveTowers() {
+    resetGame()
     //ASSIGN PATTERNS
     let rings = document.querySelectorAll('.ring')
     rings.forEach((ring) => {
@@ -199,6 +200,7 @@ function solveTowers() {
     let lastMove
 
     for (let i = 0; i < solutionCounter; i++) {
+        setTimeout(() => {
         rings.forEach((ring) => {
             if (ring === ring.parentElement.children[0]) {
                 if ((ring !== lastMove) && (currentMove === undefined)) {
@@ -233,6 +235,8 @@ function solveTowers() {
         lastMove = currentMove
         currentMove = undefined
         console.log(`Ring ${lastMove.id} moved to ${lastMove.parentElement.id}`)
+        turnCounter.innerText = `Turns: ${i+1}`
+        }, (i+1)*1000)
     }
 }
 
