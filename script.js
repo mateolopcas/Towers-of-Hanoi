@@ -149,8 +149,8 @@ resetButton.addEventListener('click', resetGame)
 
 //TOGGLE RINGS BUTTONS
 
-let increaseButton = document.querySelector('.increase-ring-count')
-let decreaseButton = document.querySelector('.decrease-ring-count')
+let increaseButton = document.querySelector('.increase')
+let decreaseButton = document.querySelector('.decrease')
 
 
 function addRing() {
@@ -236,11 +236,11 @@ function solveTowers() {
         currentMove = undefined
         console.log(`Ring ${lastMove.id} moved to ${lastMove.parentElement.id}`)
         turnCounter.innerText = `Turns: ${i+1}`
-        }, (i+1)*1000)
+        }, (i+1)*750)
     }
 }
 
 
 
-let solveButton = document.querySelector('.solution')
+let solveButton = document.querySelector('.solve-button')
 solveButton.addEventListener('click', solveTowers)

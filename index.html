@@ -6,11 +6,14 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>Towers of Hanoi</title>
         <link rel="stylesheet" href="style.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;700&display=swap" rel="stylesheet">
     </head>
     <body>
-         <header>
+        <header>
              <h1>Towers of Hanoi</h1>
-             <p>Drag and drop any top ring to a different pole. Smaller rings can only be placed on top of larger rings. Move all the rings to a different pole to win.</p>
+             <p class='instructions'>Drag and drop any top ring to a different pole. Smaller rings can only be placed on top of larger rings. Move all the rings to a different pole to win.</p>
              <h2 class='winner-text'></h2>
 
          </header>
@@ -19,11 +22,11 @@
                  <button class='reset-button'>Reset</button>
                  <div class='variable-rings'>
                      <p class='ring-counter'>Number of rings: 4</p>
-                     <button class='increase-ring-count'>Increase</button>
-                     <button class='decrease-ring-count'>Decrease</button>
+                     <button class='increase'>Increase</button>
+                     <button class='decrease'>Decrease</button>
                  </div>
                  <p class='turn-counter'>Turns: 0</p>
-                 <button class='solution'>Solve</button>
+                 <button class='solve-button'>Solve</button>
              </div>
              <div class='pole-container'>
                  <div class='pole' id='pole-1'>
