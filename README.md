@@ -8,6 +8,8 @@ I wrote it initially using a point-and-click method to play the game. After I ha
 
 After making the game playable using drag instead of click, I wanted another challenge, to write an algorithm that self-solves the towers.
 
+Side note: dragging events do not work on mobile. Will have to learn about touch events and update.
+
 ## Installation/Usage
 
 Clone this repo and open the index.html file in your browser. Have fun playing!
@@ -32,14 +34,14 @@ For reference:
 
 2. The largest ring in the stack always has a left pattern and rings alternate patterns.
     - For a 3 ring game:
-        - Ring 3 = left
-        - Ring 2 = right
         - Ring 1 = left
+        - Ring 2 = right
+        - Ring 3 = left
     - For a 4 ring game:
-        - Ring 4 = left
-        - Ring 3 = right
-        - Ring 2 = left
         - Ring 1 = right
+        - Ring 2 = left
+        - Ring 3 = right
+        - Ring 4 = left
 
 3. Move the smallest ring possible that was not moved during the previous turn.
 
