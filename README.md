@@ -50,5 +50,6 @@ So rules 1 and 2 determine an individual ring's movement while rule 3 determines
 ## Credits
 
 MDN Drag and Drop: https://developer.mozilla.org/en-US/docs/Web/API/HTML_Drag_and_Drop_API
+CSS Scan Buttons: https://getcssscan.com/css-buttons-examples
 
 Author: Mateo Lopez-Castillo
